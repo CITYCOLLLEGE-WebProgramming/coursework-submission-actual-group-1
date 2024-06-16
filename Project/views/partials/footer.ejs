@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Footer</title>
+    <style>
+
+        footer {
+            z-index: 1000;
+            width: 100%;
+        }
+        .footer-fixed-bottom {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-container h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .footer-container p {
+            margin-bottom: 10px;
+        }
+        .footer-container ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-container ul li {
+            margin-bottom: 10px;
+        }
+        .footer-container ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .footer-container ul li a:hover {
+            color: #ccc;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .quick-links {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body> 
+</body>
+<footer class="text-white text-center text-lg-start bg-dark footer-fixed-bottom">
+    <div class="container p-4 footer-container">
+      <!--Grid row-->
+      <div class="row mt-4">
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <h1 class="text-uppercase mb-4">General Info</h1>
+          <p>
+            At ABC Bank, we are committed to providing our customers with exceptional banking services and financial solutions.
+             Established in 1985, we have grown into a trusted institution, offering a wide range of products including savings
+              accounts, loans, and investment opportunities. 
+          </p>
+          <p>
+            Our mission is to empower individuals and businesses to achieve their
+               financial goals with confidence and ease.
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <h1 class="text-uppercase">How to contact us?</h1>
+          <ul class="fa-ul" style="margin-left: 1.65em;">
+            <li class="mb-3">
+              <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">Our office  Thessaloniki, 00-967, Greece</span>
+            </li>
+            <li class="mb-3">
+              <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2">Email: contact@xyzbank.com</span>
+            </li>
+            <li class="mb-3">
+              <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">Phone: 1-800-555-7890</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <h1 class="text-uppercase mb-4" style="margin-right: 30%;">Quick Links</h1>
+          <div class="row quick-links">
+            <div class="col-md-6">
+              <ul>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/transactions">My Transactions</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center p-3 footer-bottom">
+      ABC Bank © 2024. All Rights Reserved.
+    </div>
+</footer>
+</html>

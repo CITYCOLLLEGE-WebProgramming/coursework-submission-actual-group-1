@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link href="/css/transactions.css" rel="stylesheet">     
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <section class="featured-section">
+        <div class="container1">
+            <div class="main-section">
+                <h1>Transactions</h1>
+                <div class="dateAndSort">
+                    <h2 class="recent-date">1 April, Monday</h2>
+                    <input type="text" id="search-input" placeholder="Search">
+                    <button id="sort-button">Sort</button>
+                </div>
+                <div id="transactions-container"></div>
+                <div class="pagination">
+                    <button class="page-btn" data-page="1">1</button>
+                    <button class="page-btn" data-page="2">2</button>
+                    <button class="page-btn" data-page="3">3</button>
+                </div>
+            </div>
+        </div>
+        <div id="overlay">
+            <div id="popup" style="border: 2px rgb(152, 146, 146) solid;">
+                <button id="close-popup">&times;</button>
+                <h2 style="margin-top: 40px;">Transaction Details:</h2>
+                <p id="bank-id"></p>
+                <p id="bank-name"></p>
+                <p id="dateTime"></p>
+                <p id="sender-id"></p>
+                <p id="amount">+ 2000 $</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <%- include('partials/footer') %>
+    </footer>
+    <script src="/transactions.js"></script>
+</body>
+</html>

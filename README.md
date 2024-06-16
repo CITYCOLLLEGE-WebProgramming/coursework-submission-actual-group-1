@@ -6,3 +6,8 @@ Make sure you put your code in the `Project` directory
 - Use the `Project/views` directory for any templates
 - Use the `Project/views/partials` directory for any partials
 - Use the `Project/models`  directory for your models in case of Mongo
+
+You need mySQL workbench and initialize the database.
+After that you need to input the actual database name and password in the app.js  database connection.
+Open terminal in the folder and type node app.js. This is an App thus we run app.js and no index.
+Open the browser and run localhost:3000

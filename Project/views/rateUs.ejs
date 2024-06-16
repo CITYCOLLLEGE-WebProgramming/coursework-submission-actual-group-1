@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container1 {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            animation: fadeIn 1s ease-in-out;
+            flex-grow: 1;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #007BFF;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+        }
+        .options input {
+            display: none;
+        }
+        .options label {
+            padding: 10px 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .options input:checked + label {
+            background-color: #007BFF;
+            color: white;
+            transform: scale(1.1);
+        }
+        .options label:hover {
+            background-color: #007BFF;
+            color: white;
+            transform: scale(1.05);
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        textarea:focus {
+            border-color: #007BFF;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .social-icons {
+            margin: 10px 0;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/nav.ejs')%>
+    <div class="container1">
+        <h1>Rate Our Bank App</h1>
+        <form id="rateUsForm">
+            <div class="question">
+                <label for="question1">1. Did you enjoy the app?</label>
+                <div class="options">
+                    <input type="radio" id="q1-1" name="question1" value="1">
+                    <label for="q1-1">1</label>
+                    <input type="radio" id="q1-2" name="question1" value="2">
+                    <label for="q1-2">2</label>
+                    <input type="radio" id="q1-3" name="question1" value="3">
+                    <label for="q1-3">3</label>
+                    <input type="radio" id="q1-4" name="question1" value="4">
+                    <label for="q1-4">4</label>
+                    <input type="radio" id="q1-5" name="question1" value="5">
+                    <label for="q1-5">5</label>
+                </div>
+            </div>
+            <div class="question">
+                <label for="question2">2. How easy was it to use the app?</label>
+                <div class="options">
+                    <input type="radio" id="q2-1" name="question2" value="1">
+                    <label for="q2-1">1</label>
+                    <input type="radio" id="q2-2" name="question2" value="2">
+                    <label for="q2-2">2</label>
+                    <input type="radio" id="q2-3" name="question2" value="3">
+                    <label for="q2-3">3</label>
+                    <input type="radio" id="q2-4" name="question2" value="4">
+                    <label for="q2-4">4</label>
+                    <input type="radio" id="q2-5" name="question2" value="5">
+                    <label for="q2-5">5</label>
+                </div>
+            </div>
+            <div class="question">
+                <label for="question3">3. How likely are you to recommend the app to a friend?</label>
+                <div class="options">
+                    <input type="radio" id="q3-1" name="question3" value="1">
+                    <label for="q3-1">1</label>
+                    <input type="radio" id="q3-2" name="question3" value="2">
+                    <label for="q3-2">2</label>
+                    <input type="radio" id="q3-3" name="question3" value="3">
+                    <label for="q3-3">3</label>
+                    <input type="radio" id="q3-4" name="question3" value="4">
+                    <label for="q3-4">4</label>
+                    <input type="radio" id="q3-5" name="question3" value="5">
+                    <label for="q3-5">5</label>
+                </div>
+            </div>
+            <div class="question">
+                <label for="feedback">4. Did you encounter any bugs during your time using the app? If so, please describe them:</label>
+                <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea>
+            </div>
+            <div class="question">
+                <label for="bugs">5. Any additional feedback?</label>
+                <textarea id="bugs" name="bugs" rows="4" cols="50"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <%- include('partials/footer.ejs') %>
+    <script>
+        document.getElementById('rateUsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Serialize form data to JSON object
+            const formData = {
+                question1: document.querySelector('input[name="question1"]:checked').value,
+                question2: document.querySelector('input[name="question2"]:checked').value,
+                question3: document.querySelector('input[name="question3"]:checked').value,
+                feedback: document.getElementById('feedback').value,
+                bugs: document.getElementById('bugs').value
+            };
+
+            fetch('/rateUs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Thank you for your feedback!');
+                } else {
+                    alert('There was an error submitting your feedback. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your feedback. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bank FAQ</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+                font-family: 'Arial', sans-serif;
+                background: linear-gradient(to right, #f4f4f4, #eaeaea);
+            }
+            .container1 {
+                flex: 1;
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                animation: fadeIn 1s ease-in-out;
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+                position: relative;
+            }
+            h1:after {
+                content: '';
+                width: 50px;
+                height: 3px;
+                background: #007BFF;
+                display: block;
+                margin: 10px auto 0;
+            }
+            .search-bar {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .search-bar input {
+                width: 80%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            .faq {
+                margin: 20px 0;
+            }
+            .faq h2 {
+                cursor: pointer;
+                margin: 0;
+                padding: 15px;
+                background-color: #007BFF;
+                color: #fff;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+                position: relative;
+            }
+            .faq h2:hover {
+                background-color: #0056b3;
+            }
+            .faq h2 .fas {
+                position: absolute;
+                right: 15px;
+            }
+            .faq p {
+                margin: 0;
+                padding: 15px;
+                display: none;
+                background-color: #f4f4f4;
+                border-left: 3px solid #007BFF;
+                border-radius: 0 0 5px 5px;
+                overflow: hidden;
+            }
+            .faq p.show {
+                display: block;
+                animation: slideDown 0.3s ease-in-out;
+            }
+            .back-to-top {
+                display: none;
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background-color: #007BFF;
+                color: #fff;
+                border: none;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                cursor: pointer;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s;
+            }
+            .back-to-top:hover {
+                background-color: #0056b3;
+            }
+            .contact-info a {
+                color: #007BFF;
+                text-decoration: none;
+            }
+            .contact-info a:hover {
+                text-decoration: underline;
+            }
+            .social-icons {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .social-icons a {
+                color: #ffffff;
+                margin: 0 10px;
+                text-decoration: none;
+                font-size: 20px;
+                transition: color 0.3s;
+            }
+            .social-icons a:hover {
+                color: #0056b3;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideDown {
+                from { max-height: 0; }
+                to { max-height: 200px; }
+            }
+            @media (max-width: 600px) {
+                .container {
+                    margin: 10px;
+                    padding: 15px;
+                }
+                .faq h2 {
+                    font-size: 16px;
+                }
+                .faq p {
+                    font-size: 14px;
+                }
+                .search-bar input {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <%- include('partials/nav.ejs')%>
+        <div class="container1">
+            <h1>Frequently Asked Questions</h1>
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search FAQs...">
+            </div>
+            <section class="faq">
+                <h2>Q: How do I register for online banking? <i class="fas fa-chevron-down"></i></h2>
+                <p>A: To register for online banking, visit our website and click on the "Sign Up" link. You will need to fill in our form your name, surname, email and password. Follow the instructions on the screen to complete the registration process.</p>
+            </section>
+            <section class="faq">
+                <h2>Q: How do I ensure my online banking account is secure? <i class="fas fa-chevron-down"></i></h2>
+                <p>A: You are not required to do anything we are handling the security of your account with a number of ways like hashing your password.</p>
+            </section>
+            <section class="faq">
+                <h2>Q: What should I do if I suspect fraudulent activity on my account? <i class="fas fa-chevron-down"></i></h2>
+                <p>A: If you suspect fraudulent activity on your account, immediately contact our customer service team using the phone number or email address provided on our website. We will guide you through the process of securing your account and investigating the fraudulent activity.</p>
+            </section>
+            <section class="faq">
+                <h2>Q: How do I transfer money to another account? <i class="fas fa-chevron-down"></i></h2>
+                <p>A: In order to transfer money to another account you need to be on the home page of our app and click on the credit card icon next to your balance. Afterwards fill the form that appears as needed.</p>
+            </section>
+            <section class="faq">
+                <h2>Q: What is the maximum amount I can transfer in a single transaction? <i class="fas fa-chevron-down"></i></h2>
+                <p>A: We have no specific limit to the amount you can transfer at once. The limit is only your current balance.</p>
+            </section>
+        </div>
+        <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+        <%- include('partials/footer.ejs') %>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const faqs = document.querySelectorAll('.faq h2');
+                faqs.forEach(faq => {
+                    faq.addEventListener('click', function() {
+                        const answer = this.nextElementSibling;
+                        const icon = this.querySelector('.fas');
+                        answer.classList.toggle('show');
+                        if (answer.classList.contains('show')) {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        } else {
+                            icon.classList.remove('fa-chevron-up');
+                            icon.classList.add('fa-chevron-down');
+                        }
+                    });
+                });
+
+                const searchInput = document.getElementById('search');
+                searchInput.addEventListener('input', function() {
+                    const filter = searchInput.value.toLowerCase();
+                    const faqSections = document.querySelectorAll('.faq');
+                    faqSections.forEach(section => {
+                        const question = section.querySelector('h2').innerText.toLowerCase();
+                        if (question.includes(filter)) {
+                            section.style.display = '';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+
+                const backToTopButton = document.querySelector('.back-to-top');
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 200) {
+                        backToTopButton.style.display = 'block';
+                    } else {
+                        backToTopButton.style.display = 'none';
+                    }
+                });
+
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        </script>
+    </body>
+</html>

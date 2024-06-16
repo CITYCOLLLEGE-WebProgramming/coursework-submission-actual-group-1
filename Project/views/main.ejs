@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Main Page</title>  
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/mainStyles.css" rel="stylesheet">     
+        <script src="https://kit.fontawesome.com/a8a36e70db.js" crossorigin="anonymous"></script> 
+    </head>
+    <body>
+        <%- include('partials/nav') %>
+        <main>
+            <section class="featured-section">
+                <div class="container">
+                    <div class="row justify-content-center main-section">
+                        <div class="col-lg-5 col-12">
+                            <div class="custom-block bg-white" id="custom-block-left">
+                                <div class="user-info">
+                                    <div class="user-info-row1">
+                                        <h1><%= name %> <%= surname %></h1>
+                                        <h2>Account ID: <%= accountId %></h2>
+                                    </div>
+                                    <div class="user-info-row2">
+                                        <div class="payment-info">
+                                            <p class="amount"><%= amount %> $</p>
+                                            <a class="create-payment overlay-trigger" href="#"><i class="fa-solid fa-credit-card" style="color: black;"></i></a>
+                                            <a class="verify-button" href="/verify">Verify your Account</a>
+                                            <div id="paymentModal" class="modal">
+                                                <div class="modal-content">
+                                                    <span class="close">&times;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="IBAN" style="font-size: 14px; color: grey;">IBAN: <span><%= iban %></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container2">
+                    <div class="currency-container">
+                        <div class="input-box">
+                            <label for="amount" id="label">Enter amount</label>
+                            <input type="text" class="TypeHere" id="amountConv" placeholder="Type here" required />
+                        </div>
+                        <div class="currency">
+                            <div class="box">
+                                <select class="select-option" name="from-currency" id="fromCurrency">
+                                    <option value="USD">United States Dollar</option>
+                                </select>
+                            </div>
+                            <div>
+                                <span>TO</span>
+                            </div>
+                            <div class="box">
+                                <select class="select-option" name="to-currency" id="toCurrency">
+                                    <option value="USD">United States Dollar</option>
+                                </select>
+                            </div>
+                            <button class="convert">Convert</button>
+                            <p class="result"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                <!-- Popup HTML -->
+            <div id="overlay">
+                <div id="popup" style="border: 2px rgb(152, 146, 146) solid;">
+                    <button id="close-popup">&times;</button>
+                    <h1 id="create-payment">Create Payment</h1>
+                    <form id="transaction-form">
+                        <div id="transaction-details">
+                        </div>
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" name="amount" required>
+
+                        <label for="iban">IBAN of Reciever:</label>
+                        <input type="text" id="iban" name="iban" placeholder="**********" required pattern="[0-9]{28}" title="Please enter exactly 28 digits" oninput="validateIBAN(this)" data-valid="false">
+
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" placeholder="Write a comment up to 150 characters" required></textarea>
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>    
+        </main>
+        <%- include('partials/footer.ejs')%>
+        <script>
+            let input = document.getElementById("amountConv");
+            let apiKey = "656e86e08508072b2def380c";
+            let fromCurrency = document.getElementById("fromCurrency");
+            let toCurrency = document.getElementById("toCurrency");
+
+            function addCurrency() {
+                const currencies = [
+                    { code: "USD", flag: "$", name: "United States Dollar" },
+                    { code: "EUR", flag: "€", name: "Euro" },
+                    { code: "GBP", flag: "£", name: "British Pound Sterling" },
+                    { code: "JPY", flag: "¥", name: "Japanese Yen" },
+                    { code: "CNY", flag: "¥", name: "Chinese Yuan" },
+                    { code: "AUD", flag: "A$", name: "Australian Dollar" },
+                    { code: "CAD", flag: "C$", name: "Canadian Dollar" },
+                    { code: "CHF", flag: "Fr", name: "Swiss Franc" },
+                    { code: "HKD", flag: "HK$", name: "Hong Kong Dollar" },
+                    { code: "NZD", flag: "NZ$", name: "New Zealand Dollar" },
+                    { code: "KRW", flag: "₩", name: "South Korean Won" },
+                    { code: "SGD", flag: "S$", name: "Singapore Dollar" },
+                    { code: "UAH", flag: "₴", name: "Ukrainian Hryvnia" },
+                    { code: "RUB", flag: "₽", name: "Russian Ruble" }
+                ];
+
+                currencies.forEach((currency) => {
+                    createOption(currency, "USD", fromCurrency);
+                    createOption(currency, "EUR", toCurrency);
+                });
+            }
+
+            function createOption(currency, defaultCode, element) {
+                element.innerHTML += `<option class="select-option" value="${currency.code}" 
+                ${currency.code === defaultCode ? 'selected' : ''}>
+                ${currency.flag} ${currency.code} - ${currency.name}</option>`;
+            }
+
+            function convertCurrency() {
+                const BASE_URL = `https://v6.exchangerate-api.com/v6/${apiKey}`;
+                const fromCurrrencyCode = document.getElementById("fromCurrency").value;
+                const toCurrencyCode = document.getElementById("toCurrency").value;
+                const result = document.querySelector(".result");
+                const amountConv = input.value;
+
+                if (amountConv !== "") {
+                    const url = `${BASE_URL}/pair/${fromCurrrencyCode}/${toCurrencyCode}`;
+                    fetch(url)
+                        .then((resp) => resp.json())
+                        .then((data) => {
+                            const conversionResult = (amountConv * data.conversion_rate).toFixed(2);
+                            const formattedResult = conversionResult.replace(
+                                /\B(?=(\d{3})+(?!\d))/g,
+                                ","
+                            );
+                            result.innerHTML = `${amountConv} ${fromCurrrencyCode} = ${formattedResult} ${toCurrencyCode}`;
+                        });
+                } else {
+                    alert("Please enter a valid amount.");
+                }
+            }
+
+            addCurrency();
+            const convertBtn = document.querySelector(".convert");
+            convertBtn.addEventListener("click", convertCurrency);
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const overlay = document.getElementById('overlay');
+                const closePopupButton = document.getElementById('close-popup');
+                const amountInput = document.getElementById('amount');
+                let balanceDisplay = document.getElementById('balance-display');
+                let iban = ''; // Declare iban in a scope accessible to other functions
+
+                function showPopup() {
+                    overlay.classList.add('show');
+                    if (!balanceDisplay) {
+                        balanceDisplay = document.createElement('p');
+                        balanceDisplay.id = 'balance-display';
+                        amountInput.parentNode.insertBefore(balanceDisplay, amountInput.nextSibling);
+                    }
+                    fetchUserBalance(); // Fetch user balance when showing popup
+                }
+
+                function hidePopup() {
+                    overlay.classList.remove('show');
+                }
+
+                closePopupButton.addEventListener('click', hidePopup);
+
+                // Function to fetch user balance from server
+                async function fetchUserBalance() {
+                    try {
+                        const response = await fetch('/api/user/balance', {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch user balance');
+                        }
+
+                        const data = await response.json();
+                        userBalance = data.balance; // Update userBalance with fetched balance
+                        updateBalanceDisplay();
+                    } catch (error) {
+                        console.error('Error fetching user balance:', error);
+                        // Handle error fetching user balance
+                    }
+                }
+
+                function updateBalanceDisplay() {
+                    if (balanceDisplay) {
+                        balanceDisplay.textContent = 'Maximum transfer amount is ' + userBalance;
+                    }
+                }
+
+                const transactionForm = document.getElementById('transaction-form');
+                transactionForm.addEventListener('submit', async function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    iban = document.getElementById('iban').value.trim();
+                    const amount = parseFloat(amountInput.value.trim());
+                    const description = document.getElementById('description').value.trim();
+
+                    // Validate IBAN format
+                    if (!/^\d{28}$/.test(iban)) {
+                        document.getElementById('iban').setCustomValidity('Please enter exactly 28 digits');
+                        document.getElementById('iban').reportValidity();
+                        return;
+                    }
+
+                    // Check IBAN existence via server-side route
+                    try {
+                        const response = await fetch('/api/check-iban', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ iban })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+
+                        const data = await response.json();
+
+                        if (data.exists) {
+                            document.getElementById('iban').setCustomValidity('');
+                            document.getElementById('iban').reportValidity();
+
+                            // Proceed with transaction submission
+                            try {
+                                const transactionResponse = await fetch('/api/transaction', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ amount, description, iban }) // Pass iban in the transaction data
+                                });
+
+                                if (!transactionResponse.ok) {
+                                    throw new Error('Transaction failed');
+                                }
+
+                                const transactionData = await transactionResponse.json();
+                                console.log('Transaction successful:', transactionData);
+
+                                // Redirect to main page
+                                window.location.href = transactionData.redirectUrl;
+
+                                // Optional: Update UI or show success message
+                            } catch (error) {
+                                console.error('Error processing transaction:', error);
+                                // Handle transaction processing error
+                            }
+                        } else {
+                            document.getElementById('iban').setCustomValidity('IBAN does not exist in database');
+                            document.getElementById('iban').reportValidity();
+                        }
+                    } catch (error) {
+                        console.error('Error checking IBAN existence:', error);
+                        document.getElementById('iban').setCustomValidity('Error checking IBAN existence');
+                        document.getElementById('iban').reportValidity();
+                    }
+                });
+
+                amountInput.addEventListener('input', function() {
+                    const amountToTransfer = parseFloat(this.value.trim());
+
+                    if (isNaN(amountToTransfer) || amountToTransfer < 0) {
+                        this.setCustomValidity('Please enter a valid amount');
+                        this.reportValidity();
+                    } else if (amountToTransfer > userBalance) {
+                        this.setCustomValidity('Insufficient balance. You can transfer up to ' + userBalance);
+                        this.reportValidity();
+                    } else {
+                        this.setCustomValidity('');
+                        balanceDisplay.textContent = 'Maximum transfer amount is ' + userBalance;
+                    }
+                });
+
+                // Event listeners for triggering the popup
+                const overlayTriggers = document.querySelectorAll('.overlay-trigger');
+                overlayTriggers.forEach(trigger => {
+                    trigger.addEventListener('click', showPopup);
+                });
+            });
+        </script>
+    </body>
+</html>

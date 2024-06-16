@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Settings</title>
+    </head>
+    <body>
+        <%- include('partials/nav') %>
+        <div class="profile" id="profile">
+            <h1 style="margin-left: 5%">Profile Information</h1>
+                <ul>
+                    <li class="profile-info"><strong>Full Name: <%= name %> <%= surname %></strong></li>
+                    <li class="profile-info"> <strong>Email: <span id="email"><%= email %></span></strong><button class="edit-button" data-type="email">Edit</button></li>
+                    <li class="profile-info"><strong>Account ID: <%= accountId %></strong></li>
+                    <li class="profile-info"><strong>Account creation Date: <%= dateTime  %></strong></li>
+                </ul>
+        </div>
+        <input type="hidden" id="userId" value="<%= userId %>"> <!-- Hidden input to store user_id -->
+        <footer>
+            <%- include('partials/footer') %>
+        </footer>
+        <script src="/settings.js"></script>
+    </body>
+
+</html>

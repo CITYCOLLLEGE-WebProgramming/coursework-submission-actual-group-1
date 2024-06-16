@@ -1,0 +1,221 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+
+    background-color: #f0f0f0;
+}
+
+footer {
+    margin-top: auto;
+}
+.container1 {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    box-shadow: 0px 2px 4px grey, 0px 2.5px 2.5px grey;
+    background-color: #fff;
+    border-radius: 5px;
+    min-height: 100svb;
+
+}
+
+.custom-block {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.custom-block:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.custom-block-overlay-text h1 {
+    font-size: 22px;
+}
+
+.recent-date {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.recent-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.circular-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.recent-details {
+    flex-grow: 1;
+}
+
+.recent-bank-name {
+    font-size: 16px;
+    margin: 0;
+}
+
+.recent-description {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.recent-money-amount {
+    font-size: 16px;
+    font-weight: bold;
+    color: green;
+}
+
+.recent-money-amount-send {
+    color: red;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 0 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    box-shadow: 0px 2px 4px grey, 0px 2.5px 2.5px grey;
+}
+
+.dateAndSort {
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #333;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.page-btn:hover {
+    background-color: #ddd;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: lightgray;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.pagination button.active {
+    background-color: darkgray;
+    color: white;
+    font-weight: bold;
+}
+
+#search-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#search-input:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#sort-button {
+    padding: 10px 5px;
+    background-color: #f0f0f0;
+    border: 5px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+#sort-button:hover {
+    background-color: #ddd;
+}
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    z-index: 999;
+}
+
+#popup {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1100;
+}
+
+#popup h2 {
+    margin-bottom: 20px;
+}
+
+#overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+#close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: black;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+}
